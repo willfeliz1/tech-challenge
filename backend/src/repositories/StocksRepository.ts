@@ -20,6 +20,12 @@ class StocksRepository implements IStocksRepository {
 
     return stock;
   }
+
+  public async findAll(): Promise<Stocks[] | undefined> {
+    const stocks = this.ormRepository.find();
+
+    return stocks;
+  }
 }
 
 export default StocksRepository;

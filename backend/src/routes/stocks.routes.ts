@@ -5,6 +5,6 @@ const stocksRouter = Router();
 const stocksController = new StocksController();
 
 stocksRouter.post('/', stocksController.create);
-// stocksRouter.get('/', stocksController.findAll);
+stocksRouter.get('/', stocksController.findAll);
 
 export default stocksRouter;
