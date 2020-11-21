@@ -16,16 +16,17 @@ class Stocks {
   @Column()
   name: string;
 
-  @OneToMany(() => StocksProducts, stock_products => stock_products.stocks, {
-    cascade: true,
-  })
-  stockproducts: StocksProducts[];
-
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => StocksProducts, stock_products => stock_products.stocks, {
+    cascade: true,
+    eager: true,
+  })
+  stockproducts: StocksProducts[];
 }
 
 export default Stocks;
