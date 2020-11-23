@@ -57,19 +57,19 @@ class CreateStocksService {
       );
     }
 
+    const addProductQuantity = products.map(product => ({
+      id: product.id,
+      quantity:
+        existentProducts.filter(p => p.id === product.id)[0].quantity +
+        product.quantity,
+    }));
+
+    await this.productsRepository.updateQuantity(addProductQuantity);
+
     const serializedProducts = products.map(product => ({
       product_id: product.id,
       quantity: product.quantity,
     }));
-
-    const orderedProductsQuantity = products.map(product => ({
-      id: product.id,
-      quantity:
-        existentProducts.filter(p => p.id === product.id)[0].quantity -
-        product.quantity,
-    }));
-
-    await this.productsRepository.updateQuantity(orderedProductsQuantity);
 
     const stock = await this.stocksRepository.create({
       name,
